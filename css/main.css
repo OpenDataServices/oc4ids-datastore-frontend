@@ -1,0 +1,224 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --grey: #576f7b;
+  --red: #d60000;
+  --white: #ffffff;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+body {
+  line-height: 1.5rem;
+  min-height: 100vh;
+}
+
+nav ul {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+}
+
+h1 {
+  margin: 2.4rem 0 0 0;
+  text-align: center;
+}
+
+.logo {
+  margin: 1rem;
+  width: 200px;
+}
+
+.brand {
+  background-color: var(--grey);
+  height: 2.4rem;
+  position: relative;
+  width: 100%;
+}
+
+.brand::before {
+  background-color: var(--red);
+  bottom: 0;
+  clip-path: polygon(0 0, 97.5% 0%, 100% 100%, 0% 100%);
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 75%;
+  top: 0;
+}
+
+.intro {
+  margin: 2.4rem auto;
+  max-width: 75ch;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  padding: 1rem 0;
+}
+
+#publisher-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  gap: 2.4rem;
+  margin: 2.4rem auto;
+  max-width: 75ch;
+  width: 100%;
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-left: 4px solid var(--red);
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 150px;
+  padding: 1rem;
+  width: 100%;
+}
+
+.card .left {
+  display: flex;
+  flex: 0 0 40%;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+.card .right {
+  display: flex;
+  flex: 0 0 60%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.card .date {
+  font-size: 0.8rem;
+}
+
+.card ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  text-align: center;
+}
+
+.card ul li {
+ flex: 1;
+ min-width: 100px;
+}
+
+.card ul li .title {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.card ul li .value {
+  display: block;
+  margin: 1rem 0 0 0;
+}
+
+.card ul li img.validity {
+  height: 2rem;
+  margin: 0.8rem 0 0 0;
+}
+
+.card ul li img.licence {
+  height: 1.5rem;
+  margin: 1rem 0 0 0;
+}
+
+.card .dropdown {
+  display: inline-block;
+  margin: 2rem 0 0 0;
+  position: relative;
+  width: max-content;
+  z-index: 1;
+}
+
+.card .dropdown .download-btn {
+  border: none;
+  border-radius: 2rem;
+  background-color: var(--grey);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath d='M6 9L12 15L18 9' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 1rem;
+  padding: 0.5rem 2rem 0.5rem 0.8rem;
+}
+
+.card .dropdown .download-btn:hover {
+  background-color: var(--red);
+}
+
+.card .dropdown .dropdown-content {
+  background-color: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: none;
+  left: 1rem;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  top: calc(100% - 1px);
+  transform: translateX(0);
+  width: calc(100% - 2rem);
+  z-index: -1;
+}
+
+.card .dropdown .dropdown-content.show {
+  display: block;
+}
+
+.card .dropdown .dropdown-content ul,
+.card .dropdown .dropdown-content li {
+  margin: 0;
+  padding: 0;
+}
+
+.card .dropdown .dropdown-content a:link,
+.card .dropdown .dropdown-content a:visited {
+  display: block;
+  color: var(--grey);
+  text-decoration: underline;
+  padding: 0.5rem 0;
+  width: calc(100% - 0.5rem - 1px);
+}
+
+.card .dropdown .dropdown-content a:active,
+.card .dropdown .dropdown-content a:focus,
+.card .dropdown .dropdown-content a:hover {
+  background-color: var(--red);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
