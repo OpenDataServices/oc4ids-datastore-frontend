@@ -1,62 +1,59 @@
-const mockUrl = 'https://my.api.mockaroo.com/datasets.json?key=0a23bcf0';
+const url = 'https://datastore-dev.oc4ids.opendataservices.coop/datasets';
 
 let list;
 
 const getData = async (url) => {
-  await fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((datum) => {
-        populateList(datum);
-      });
-    })
-    .catch((error) => console.error(error));
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    data.forEach((datum) => {
+      populateList(datum);
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
 const populateList = (data) => {
+  const downloads = data.downloads.reduce((acc, current) => {
+    acc[current.format] = current.url;
+    return acc;
+  }, {});
+  
+
   const listItem = document.createElement('li');
   listItem.classList.add('card');
   listItem.innerHTML = `
-    <div class="left">
-      <h2>${data.name}</h2>
-      <p class="date">Last updated <time datetime="${data.updated}">${data.updated}</time></p>
-    </div>
-    <div class="right">
-      <ul>
-        <li>
-          <span class="title">Projects</span>
-          <span class="value">${data.projects}</span>
-        </li>
-        <li>
-          <span class="title">Valid data</span>
-            ${data.valid ? '<img class="validity" src="./assets/check.svg" alt="">' : '<img class="validity" src="./assets/cross.svg" alt="">'}
-          <span class="value sr-only">
-            ${data.valid ? 'Valid data' : 'Invalid data'}
-          </span>
-        </li>
-        <li>
-          <span class="title">Licence</span>
-          <img class="licence" src="./assets/licences/nd.svg" alt="">
-          <span class="value sr-only">
-            ${data.licence}
-          </span>
-        </li>
-      </ul>
-       <div class="dropdown">
+    <header class="card-header">
+      <h2>
+        <a href="${data.source_url}">
+          ${data.publisher.name}
+        </a>
+      </h2>
+    </header>
+    <p>Licence:
+      <a class="value" href="${data.license.url}">
+        ${data.license.name || data.license.url}
+      </a>
+    </p>
+    <footer class="card-footer">
+      <p class="date">Last retrieved <time datetime="${data.loaded_at}">${new Date(data.loaded_at).toISOString().slice(0,10)}</time></p>
+      <div class="dropdown">
         <button class="download-btn">Download</button>
         <ul class="dropdown-content">
           <li>
-            <a href="${data.xlsx}">XLSX</a>
+            <a href="${downloads.xlsx}">XLSX</a>
           </li>
           <li>
-            <a href="${data.csv}">CSV</a>
+            <a href="${downloads.csv}">CSV</a>
           </li>
           <li>
-            <a href="${data.json}">JSON</a>
+            <a href="${downloads.json}">JSON</a>
           </li>
         </ul>
-      </div> 
-    </div>
+      </div>
+    </footer>
   `;
   list.appendChild(listItem);
 };
@@ -69,7 +66,7 @@ const toggleDownloads = (e) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   list = document.querySelector('#publisher-list');
-  await getData(mockUrl)
+  await getData(url)
 
   const downloadButtons = document.querySelectorAll('.download-btn');
   downloadButtons.forEach((button) => {
