@@ -9,6 +9,7 @@
 :root {
   --black: #000000;
   --grey: #576f7b;
+  --grey-faint: rgba(87, 111, 123, 0.5);
   --red: #d60000;
   --white: #ffffff;
 }
@@ -70,6 +71,14 @@ a:hover {
   top: 0;
 }
 
+.subtitle {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 1rem auto;
+  max-width: 75ch;
+  text-align: center;
+}
+
 .intro {
   margin: 2.4rem auto;
   max-width: 75ch;
@@ -79,6 +88,29 @@ a:hover {
 .intro p {
   font-size: 1.2rem;
   padding: 1rem 0;
+}
+
+.icon {
+  margin: 0 0.5rem -2px 0;
+  width: 1.2rem;
+}
+
+.admonition {
+  border: 1px solid var(--grey-faint);
+  margin: -1.2rem auto 2.4rem auto;
+  max-width: 75ch;
+}
+
+.admonition .admonition-title {
+  background-color: var(--grey);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.admonition p {
+  padding: 0.5rem;
 }
 
 #publisher-list {
@@ -93,9 +125,9 @@ a:hover {
 }
 
 .card {
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--grey-faint);
   border-left: 4px solid var(--red);
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 4px 0px var(--grey-faint);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -206,7 +238,7 @@ a:hover {
 
 .card .dropdown .dropdown-content {
   background-color: var(--white);
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--grey-faint);
   display: none;
   left: 1rem;
   margin: 0;
