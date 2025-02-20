@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OC4IDS Data Registry</title>
+
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="./js/main.js" type="module" defer></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="#">
+            <img class="logo" src="./assets/cost-logo.png" alt="CoST logo">
+            <span class="sr-only">CoST</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img class="logo" src="./assets/oc4ids-logo.png" alt="OC4IDS logo">
+            <span class="sr-only">OC4IDS</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="brand"></div>
+  </header>
+  <main>
+    <h1>CoST Datastore and Registry</h1>
+    <p class="subtitle">Access infrastructure project data in OC4IDS format</p>
+    <section class="intro">
+      <p>Welcome to the CoST Datastore and Registry. The datastore provides access to datasets published by CoST members according to the <a href="https://standard.open-contracting.org/infrastructure/latest/en/">Open Contracting for Infrastructure Data Standard</a> (OC4IDS). The datasets are valid according to the OC4IDS schema and openly licensed. You can download full datasets in spreadsheet, CSV or JSON format, ready for analysis in your preferred tool.</p>
+      <p>The datastore fetches and stores data from OC4IDS publishers on a daily basis. If a publisher's data fails validation against the OC4IDS schema or is unavailable, the datastore provides access to the most recent valid dataset successfully fetched from the publisher.</p>
+    </section>
+    <div class="admonition" role="note" aria-labelledby="get-support">
+      <p class="admonition-title" id="get-support"><img class="icon" src="./assets/bulb.svg" alt="">Get support</p>
+      <p>Need help accessing or using data? <a href="mailto: opencode@infrastructuretransparency.org">Contact the OC4IDS Helpdesk</a>.</p>
+    </div>
+    <ul id="publisher-list"></ul>
+  </main>
+  <footer>
+    <!-- TODO -->
+  </footer>
+</body>
+</html>
