@@ -1,4 +1,4 @@
-const url = 'https://api.datastore-dev.oc4ids.opendataservices.coop/datasets';
+import { endpoint } from "./endpoint.js";
 
 let list;
 
@@ -34,7 +34,7 @@ const populateList = (data) => {
     </header>
     <p>License:
       <a class="value" href="${data.license.url}">
-        ${data.license.name || data.license.url}
+        ${data.license.short_name || data.license.name || data.license.url}
       </a>
     </p>
     <footer class="card-footer">
@@ -66,7 +66,7 @@ const toggleDownloads = (e) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   list = document.querySelector('#publisher-list');
-  await getData(url)
+  await getData(endpoint)
 
   const downloadButtons = document.querySelectorAll('.download-btn');
   downloadButtons.forEach((button) => {
