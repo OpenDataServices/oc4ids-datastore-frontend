@@ -1,4 +1,4 @@
-const url = 'https://datastore-dev.oc4ids.opendataservices.coop/datasets';
+const url = 'https://api.datastore-dev.oc4ids.opendataservices.coop/datasets';
 
 let list;
 
@@ -32,7 +32,7 @@ const populateList = (data) => {
         </a>
       </h2>
     </header>
-    <p>Licence:
+    <p>License:
       <a class="value" href="${data.license.url}">
         ${data.license.name || data.license.url}
       </a>
