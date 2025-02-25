@@ -63,8 +63,18 @@ const populateList = (data) => {
 
 // Function to toggle the downloads dropdown
 const toggleDownloads = (e) => {
+  e.stopPropagation();
   const dropdown = e.target.nextElementSibling;
-  console.log(dropdown)
+
+  // Close open dropdowns
+  const openDropdowns = document.querySelectorAll('.dropdown-content.show');
+  openDropdowns.forEach((openDropdown) => {
+    if (openDropdown !== dropdown) {
+      openDropdown.classList.remove('show');
+    }
+  });
+  
+  // Show the targeted dropdown
   dropdown.classList.toggle('show');
 }
 
@@ -81,13 +91,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     button.addEventListener('click', (e) => {
       toggleDownloads(e);
     })
-    
-    // Add an event listener to all download buttons to toggle the downloads dropdown on pressing the enter key
-    button.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        toggleDownloads(e);
-      }
-    })
+  });
+
+  // Add an event listener to close dropdowns when clicking outside of one
+  document.addEventListener('click', () => {
+    // Close open dropdowns
+    const openDropdowns = document.querySelectorAll('.dropdown-content.show');
+    openDropdowns.forEach((openDropdown) => {
+      openDropdown.classList.remove('show');
+    });
   });
 });
 
