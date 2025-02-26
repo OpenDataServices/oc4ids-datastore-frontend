@@ -78,10 +78,39 @@ const toggleDownloads = (e) => {
   dropdown.classList.toggle('show');
 }
 
+// Function to scroll to the top of the page smoothly
+const scrollToTop = () => {
+  document.documentElement.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
 // Listen for the page to finish loading
 document.addEventListener('DOMContentLoaded', async () => {
-  list = document.querySelector('#publisher-list');
+  const scrollToTopButton = document.querySelector('#return-to-top-btn');
+  const header = document.querySelector('#page-header');
+
+  // Check for header to move off screen and toggle the scroll to top button
+  if (header) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        scrollToTopButton.style.display = 'none';
+      } else {
+        scrollToTopButton.style.display = 'block';
+      }
+    }, {
+      root: null,
+      threshold: 1.0
+    });
+    
+    observer.observe(header);
+  }
+
+  scrollToTopButton.addEventListener('click', scrollToTop);
   
+  list = document.querySelector('#publisher-list');
+
   // Get data from the endpoint
   await getData(endpoint)
 
