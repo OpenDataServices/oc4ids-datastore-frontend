@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'Lato Regular';
+  src:  url('/assets/fonts/Lato-Regular.woff2') format('woff2'),
+        url('/assets/fonts/Lato-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato Italic';
+  src:  url('/assets/fonts/Lato-Italic.woff2') format('woff2'),
+        url('/assets/fonts/Lato-Italic.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato Semibold';
+  src:  url('/assets/fonts/Lato-Semibold.woff2') format('woff2'),
+        url('/assets/fonts/Lato-Semibold.woff') format('woff');
+  font-display: swap;
+}
+
 *,
 *:before,
 *:after {
@@ -8,14 +29,14 @@
 
 :root {
   --black: #000000;
-  --grey: #576f7b;
-  --grey-faint: rgba(87, 111, 123, 0.5);
+  --grey: #58707b;
+  --grey-faint: rgba(88, 112, 123, 0.2);
   --red: #d60000;
   --white: #ffffff;
 }
 
 html {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lato Regular', Helvetica, Arial, sans-serif;
   font-size: 16px;
   scroll-behavior: smooth;
 }
@@ -34,6 +55,7 @@ nav ul {
 }
 
 h1 {
+  font-family: 'Lato Semibold', Helvetica, Arial, sans-serif;
   line-height: 2.4rem;
   margin: 2.4rem 0 0 0;
   text-align: center;
@@ -70,7 +92,7 @@ a:hover {
 
 .subtitle {
   font-size: 1.2rem;
-  font-style: italic;
+  font-family: 'Lato Italic', Helvetica, Arial, sans-serif;
   margin: 1rem auto;
   max-width: 75ch;
   text-align: center;
@@ -84,6 +106,7 @@ a:hover {
 
 .intro p {
   font-size: 1.2rem;
+  line-height: 1.8rem;
   padding: 1rem 0;
 }
 
@@ -169,6 +192,10 @@ a:hover {
 .card-header {
   line-height: 2rem;
   margin: 0 0 1rem 0;
+}
+
+.card-header h2 {
+  font-family: 'Lato Semibold', Helvetica, Arial, sans-serif;
 }
 
 .card-header h2 a:link,
