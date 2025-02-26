@@ -131,6 +131,7 @@ a:hover {
   cursor: pointer;
   position: fixed;
   right: 1rem;
+  z-index: 1;
 }
 
 #return-to-top-btn:hover {
