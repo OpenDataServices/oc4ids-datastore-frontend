@@ -34,6 +34,7 @@ nav ul {
 }
 
 h1 {
+  line-height: 2.4rem;
   margin: 2.4rem 0 0 0;
   text-align: center;
 }
@@ -327,4 +328,15 @@ a:hover {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+@media (max-width: 850px) {
+  .logo {
+    margin: 1rem;
+    width: 100px;
+  }
+
+  main {
+    padding: 0 1rem 3rem 1rem;
+  }
 }
