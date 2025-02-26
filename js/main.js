@@ -37,7 +37,7 @@ const populateList = (data) => {
     </header>
     <p>License:
       <a class="value" href="${data.license.url}">
-        ${data.license.short_name || data.license.name || data.license.url}
+        ${data.license.title_short || data.license.title || data.license.url}
       </a>
     </p>
     <footer class="card-footer">
