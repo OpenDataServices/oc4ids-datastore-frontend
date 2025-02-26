@@ -1,6 +1,7 @@
 import { endpoint } from './endpoint.js';
 
 let list;
+let licenseHTML;
 
 // Function to fetch data from URL
 const getData = async (url) => {
@@ -24,6 +25,18 @@ const populateList = (data) => {
     return acc;
   }, {});
   
+  // Set snippet of HTML for license fallbacks
+  if (data.license.url) {
+    licenseHTML = `
+      <a class="value" href="${data.license.url}">
+        ${data.license.title_short || data.license.title || data.license.url}
+      </a>
+    `;
+  } else {
+    licenseHTML = `
+      <span>unknown</span>
+    `;
+  }
 
   const listItem = document.createElement('li');
   listItem.classList.add('card');
@@ -36,9 +49,7 @@ const populateList = (data) => {
       </h2>
     </header>
     <p>License:
-      <a class="value" href="${data.license.url}">
-        ${data.license.title_short || data.license.title || data.license.url}
-      </a>
+      ${licenseHTML}
     </p>
     <footer class="card-footer">
       <p class="date">Last retrieved <time datetime="${data.loaded_at}">${new Date(data.loaded_at).toISOString().slice(0,10)}</time></p>
