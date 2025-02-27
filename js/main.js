@@ -1,7 +1,6 @@
 import { endpoint } from './endpoint.js';
 
 let list;
-let licenseHTML;
 
 // Function to fetch data from URL
 const getData = async (url) => {
@@ -19,11 +18,19 @@ const getData = async (url) => {
 
 // Function to generate HTML list of 'cards' from data
 const populateList = (data) => {
-  // Restructure download formats data into a simple object
-  const downloads = data.downloads.reduce((acc, current) => {
-    acc[current.format] = current.url;
-    return acc;
-  }, {});
+  let licenseHTML;
+  let downloadsHTML;
+
+  // Set snippet of HTML for links to available downloads
+  if (data.downloads.length > 0) {
+    downloadsHTML = data.downloads.sort((a, b) => a.format.localeCompare(b.format)).map((download) => {
+      return `
+        <li>
+          <a href="${download.url}">${download.format.toUpperCase()}</a>
+        </li>
+      `;
+    }).join('');
+  }
   
   // Set snippet of HTML for license fallbacks
   if (data.license.url) {
@@ -54,17 +61,9 @@ const populateList = (data) => {
     <footer class="card-footer">
       <p class="date">Last retrieved <time datetime="${data.loaded_at}">${new Date(data.loaded_at).toISOString().slice(0,10)}</time></p>
       <div class="dropdown">
-        <button class="download-btn">Download</button>
+        <button class="download-btn" ${data.downloads.length === 0 ? 'disabled' : ''}>Download</button>
         <ul class="dropdown-content">
-          <li>
-            <a href="${downloads.xlsx}">XLSX</a>
-          </li>
-          <li>
-            <a href="${downloads.csv}">CSV</a>
-          </li>
-          <li>
-            <a href="${downloads.json}">JSON</a>
-          </li>
+          ${downloadsHTML}
         </ul>
       </div>
     </footer>
