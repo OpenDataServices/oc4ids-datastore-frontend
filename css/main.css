@@ -287,6 +287,16 @@ a:hover {
   position: relative;
 }
 
+.card .dropdown .download-btn:disabled {
+  background-color: var(--grey-faint);
+  cursor: not-allowed;
+}
+
+.card .dropdown .download-btn:disabled:hover {
+  background-color: var(--grey-faint);
+  cursor: not-allowed;
+}
+
 .card .dropdown .download-btn::after {
   content: '';
   background-image: url('/assets/icons/chevron-up-solid.svg');
