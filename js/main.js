@@ -41,7 +41,7 @@ const populateList = (data) => {
     `;
   } else {
     licenseHTML = `
-      <span>unknown</span>
+      <span>Unknown</span>
     `;
   }
 
