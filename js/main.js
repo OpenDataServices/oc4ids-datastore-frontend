@@ -50,9 +50,7 @@ const populateList = (data) => {
   listItem.innerHTML = `
     <header class="card-header">
       <h2>
-        <a href="${data.source_url}">
-          ${data.publisher.name}
-        </a>
+        ${data.publisher.name}
       </h2>
     </header>
     <p>License:

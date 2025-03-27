@@ -198,48 +198,6 @@ a:hover {
   font-family: 'Lato Semibold', Helvetica, Arial, sans-serif;
 }
 
-.card-header h2 a:link,
-.card-header h2 a:visited {
-  color: var(--black);
-  text-decoration: none;
-}
-
-.card-header h2 a:active,
-.card-header h2 a:focus,
-.card-header h2 a:hover {
-  color: var(--red);
-  text-decoration: underline;
-}
-
-.card-header h2 a:link::after,
-.card-header h2 a:visited::after {
-  content: '';
-  background-position: right bottom;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  background-image: url('/assets/icons/arrow-up-right-from-square-solid.svg');
-  position: absolute;
-  margin: 0.7rem 0 0 0.4rem;
-  height: 0.7rem;
-  width: 0.7rem;
-}
-
-.card-header h2 a:active::after,
-.card-header h2 a:focus::after,
-.card-header h2 a:hover::after {
-  content: '';
-  background-position: right bottom;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  background-image: url('/assets/icons/arrow-up-right-from-square-solid.svg');
-  filter: invert(14%) sepia(93%) saturate(7231%) hue-rotate(0deg) brightness(80%) contrast(114%);
-  position: absolute;
-  margin: 0.7rem 0 0 0.4rem;
-  height: 0.7rem;
-  width: 0.7rem;
-}
-
-
 .card-footer {
   align-items: center;
   display: flex;
