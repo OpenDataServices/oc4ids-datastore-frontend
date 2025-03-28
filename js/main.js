@@ -1,5 +1,7 @@
 import { endpoint } from './endpoint.js';
+import countries from 'https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.14.0/+esm';
 
+const countriesData = 'https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.14.0/langs/en.json';
 let list;
 
 // Function to fetch data from URL
@@ -16,10 +18,23 @@ const getData = async (url) => {
   }
 };
 
+// Function to load English language country data
+const getCountries = async (url) => {
+  try {
+    const response = await fetch(url);
+    const locale = await response.json();
+    countries.registerLocale(locale);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 // Function to generate HTML list of 'cards' from data
 const populateList = (data) => {
   let licenseHTML;
   let downloadsHTML;
+  let countryHTML;
 
   // Set snippet of HTML for links to available downloads
   if (data.downloads.length > 0) {
@@ -45,6 +60,17 @@ const populateList = (data) => {
     `;
   }
 
+  // Set snippet of HTML for publisher countries
+  if (data.publisher.country) {
+    countryHTML = `
+      <p class="country">
+        (${data.publisher.country && countries.getName(data.publisher.country.toUpperCase(), 'en')})
+      </a>
+    `;
+  } else {
+    countryHTML = '';
+  }
+
   const listItem = document.createElement('li');
   listItem.classList.add('card');
   listItem.innerHTML = `
@@ -52,6 +78,7 @@ const populateList = (data) => {
       <h2>
         ${data.publisher.name}
       </h2>
+      ${countryHTML}
     </header>
     <p>License:
       ${licenseHTML}
@@ -118,9 +145,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   scrollToTopButton.addEventListener('click', scrollToTop);
   
   list = document.querySelector('#publisher-list');
+  
+  // Get countries data from i18n-iso-countries
+  await getCountries(countriesData);
 
   // Get data from the endpoint
-  await getData(endpoint)
+  await getData(endpoint);
 
   const downloadButtons = document.querySelectorAll('.download-btn');
   downloadButtons.forEach((button) => {

@@ -195,7 +195,12 @@ a:hover {
 }
 
 .card-header h2 {
+  display: inline;
   font-family: 'Lato Semibold', Helvetica, Arial, sans-serif;
+}
+
+.card-header .country {
+  display: inline;
 }
 
 .card-footer {
