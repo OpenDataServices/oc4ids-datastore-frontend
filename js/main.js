@@ -65,7 +65,7 @@ const populateList = (data) => {
     countryHTML = `
       <p class="country">
         (${data.publisher.country && countries.getName(data.publisher.country.toUpperCase(), 'en')})
-      </a>
+      </p>
     `;
   } else {
     countryHTML = '';
