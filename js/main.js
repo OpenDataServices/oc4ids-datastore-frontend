@@ -32,6 +32,7 @@ const getCountries = async (url) => {
 
 // Function to generate HTML list of 'cards' from data
 const populateList = (data) => {
+  let portalHTML;
   let licenseHTML;
   let downloadsHTML;
   let countryHTML;
@@ -47,6 +48,23 @@ const populateList = (data) => {
     }).join('');
   }
   
+  // Set snippet of HTML for publisher portal links
+  if (data.portal.url) {
+    portalHTML = `
+      <p>Publisher portal:
+        <a class="value" href="${data.portal.url}">
+          ${data.portal.title || data.portal.url}
+        </a>
+      </p>
+    `;
+  } else if (data.portal.title && !data.portal.url) {
+    portalHTML = `
+      <p>Publisher portal: ${data.portal.title}</p>
+    `;
+  } else {
+    portalHTML = ``;
+  }
+
   // Set snippet of HTML for license fallbacks
   if (data.license.url) {
     licenseHTML = `
@@ -80,6 +98,7 @@ const populateList = (data) => {
       </h2>
       ${countryHTML}
     </header>
+    ${portalHTML}
     <p>License:
       ${licenseHTML}
     </p>
