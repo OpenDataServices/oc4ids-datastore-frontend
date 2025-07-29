@@ -1,7 +1,5 @@
 import { endpoint } from './endpoint.js';
-import countries from 'https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.14.0/+esm';
 
-const countriesData = 'https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.14.0/langs/en.json';
 let list;
 
 // Function to fetch data from URL
@@ -18,24 +16,11 @@ const getData = async (url) => {
   }
 };
 
-// Function to load English language country data
-const getCountries = async (url) => {
-  try {
-    const response = await fetch(url);
-    const locale = await response.json();
-    countries.registerLocale(locale);
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
 // Function to generate HTML list of 'cards' from data
 const populateList = (data) => {
   let portalHTML;
   let licenseHTML;
   let downloadsHTML;
-  let countryHTML;
 
   // Set snippet of HTML for links to available downloads
   if (data.downloads.length > 0) {
@@ -51,7 +36,7 @@ const populateList = (data) => {
   // Set snippet of HTML for publisher portal links
   if (data.portal.url) {
     portalHTML = `
-      <p>Publisher portal:
+      <p>Available at:
         <a class="value" href="${data.portal.url}">
           ${data.portal.title || data.portal.url}
         </a>
@@ -59,7 +44,7 @@ const populateList = (data) => {
     `;
   } else if (data.portal.title && !data.portal.url) {
     portalHTML = `
-      <p>Publisher portal: ${data.portal.title}</p>
+      <p>Available at: ${data.portal.title}</p>
     `;
   } else {
     portalHTML = ``;
@@ -78,17 +63,6 @@ const populateList = (data) => {
     `;
   }
 
-  // Set snippet of HTML for publisher countries
-  if (data.publisher.country) {
-    countryHTML = `
-      <p class="country">
-        (${data.publisher.country && countries.getName(data.publisher.country.toUpperCase(), 'en')})
-      </p>
-    `;
-  } else {
-    countryHTML = '';
-  }
-
   const listItem = document.createElement('li');
   listItem.classList.add('card');
   listItem.innerHTML = `
@@ -96,7 +70,6 @@ const populateList = (data) => {
       <h2>
         ${data.publisher.name}
       </h2>
-      ${countryHTML}
     </header>
     ${portalHTML}
     <p>License:
@@ -164,9 +137,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   scrollToTopButton.addEventListener('click', scrollToTop);
   
   list = document.querySelector('#publisher-list');
-  
-  // Get countries data from i18n-iso-countries
-  await getCountries(countriesData);
 
   // Get data from the endpoint
   await getData(endpoint);
